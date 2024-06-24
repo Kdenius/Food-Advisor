@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Advisor List</title>
+</head>
+<body>
+    <h2>Advisor List</h2>
+    <ul>
+        {% for advisor in advisors %}
+        <li>{{ advisor.name }}</li>
+        <li>{{ advisor.email }}</li>
+        <li>{{ advisor.specification }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

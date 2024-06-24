@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Target</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin-top: 0;
+            font-size: 24px;
+            color: #333;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="number"],
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+        .return-home-btn {
+            margin-bottom: 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .return-home-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="{% url 'home' %}" class="return-home-btn">Back to Home</a>
+        <h1><br>Set Target</h1>
+        <form id="targetForm" method="post">
+            {% csrf_token %}
+            <label for="tr_calories">Calories:</label>
+            <input type="number" name="tr_calories" id="tr_calories" required value="{{ existing_target.tr_calories }}"><br>
+            <label>Vitamins:</label><br>
+            {% for choice in VITAMIN_CHOICES %}
+                <input type="checkbox" id="vitamin_{{ forloop.counter }}" name="tr_vitamins" value="{{ choice.0 }}"
+                       {% if existing_target and choice.0 in existing_target.tr_vitamins %} checked {% endif %}>
+                <label for="vitamin_{{ forloop.counter }}">{{ choice.1 }}</label><br>
+            {% endfor %}
+            {% comment %} <label for="tr_ingredient">Ingredient:</label> {% endcomment %}
+            {% comment %} <input type="text" name="tr_ingredient" id="tr_ingredient" required value="{{ existing_target.tr_ingredient }}"><br> {% endcomment %}
+            <button type="submit">Save</button>
+        </form>
+    </div>
+
+    <script>
+        window.onload = function() {
+            // Populate form fields with previous values if available
+            var existingTarget = {
+                tr_calories: "{{ existing_target.tr_calories }}",
+                tr_vitamins: "{{ existing_target.tr_vitamins }}",
+            };
+
+            document.getElementById("tr_calories").value = existingTarget.tr_calories;
+
+            // Split the vitamins string into an array of individual vitamin values
+            var vitamins = existingTarget.tr_vitamins.split(',');
+
+            // Loop through each checkbox and mark it as checked if its value is present in the vitamins array
+            var checkboxes = document.querySelectorAll('input[name="tr_vitamins"]');
+            checkboxes.forEach(function(checkbox) {
+                if (vitamins.includes(checkbox.value)) {
+                    checkbox.checked = true;
+                }
+            });
+        };
+    </script>
+</body>
+</html>

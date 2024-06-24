@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="img/mdb-favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <title>Food Advisor</title>
+    <style>
+        body{
+          background-image: url('https://th.bing.com/th/id/OIP.9I0rSQuLGXUU2eB474JFaAHaHa?w=195&h=196&c=7&r=0&o=5&dpr=2.2&pid=1.7');
+            background-attachment: fixed;
+            background-color: rgba(144, 155, 49, 0.5);
+            background-blend-mode: darken;
+      }
+      h1{
+          color:#fff;
+      }
+      .lead{
+          color:#aaa;
+      }
+      
+      .wrapper{margin:10vh}
+      
+      .card{
+          border: none;
+          transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+          overflow:hidden;
+          border-radius:20px;
+          min-height:500px;
+          box-shadow: 0 0 12px 0 rgba(0,0,0,0.2);
+      
+      
+      
+          &.card-has-bg{
+          transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+          background-size:120%;
+          background-repeat:no-repeat;
+          background-position: center center;
+          &:before {
+          content: '';
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          background: inherit;
+          -webkit-filter: grayscale(1);
+          -moz-filter: grayscale(100%);
+          -ms-filter: grayscale(100%);
+          -o-filter: grayscale(100%);
+          filter: grayscale(100%);}
+      
+          &:hover {
+          transform: scale(0.98);
+              box-shadow: 0 0 5px -2px rgba(0,0,0,0.3);
+          background-size:130%;
+              transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+      
+          .card-img-overlay {
+              transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+              background: rgb(255,186,33);
+              background: linear-gradient(0deg, rgba(155, 113, 65, 0.5) 0%, rgb(255, 188, 31) 100%);
+            }
+          }
+      }
+          .card-footer{
+          background: none;
+          border-top: none;
+          
+          }
+          .card-title{font-weight:800}
+          .card-meta{color:rgba(0,0,0,0.3);
+          text-transform:uppercase;
+          font-weight:500;
+          letter-spacing:2px;}
+          .card-body{ 
+          transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+          
+      
+          }
+          &:hover {
+          .card-body{
+              margin-top:8px;
+              transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+          }
+          cursor: pointer;
+          transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+      }
+          .card-img-overlay {
+          transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+          background: rgb(255,186,33);
+          background: linear-gradient(0deg, rgba(255, 188, 31, 0.693) 0%, rgb(255, 255, 255) 100%);
+        }
+      }
+      @media (max-width: 767px){
+          
+      }
+
+
+      input[type="number"]::-webkit-inner-spin-button{
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      input[type="number"]{
+            width: 35px;
+            height: 35px;
+            text-align: center;
+            border-radius: 34%;
+            border-style: dashed;
+            border-color: #3FB6A8;
+            box-shadow: 1px 1px 1px rgba(136, 136, 136, 0.599);
+            
+        }
+
+        {% comment %} process bar mate  {% endcomment %}
+
+
+        .progress{
+            height: 27px;
+            margin: 0;
+            overflow: visible;
+            border-radius: 50px;
+            box-shadow: inset 0 10px  10px rgba(244, 245, 250,0.9);
+        }
+        .progress .progress-bar{
+            border-radius: 50px;
+        }
+        .progress .progress-value{
+            position: relative;
+            left: -45px;
+            top: 4px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #fff;
+            letter-spacing: 2px;
+        }
+
+        
+        .progress-bar.active{
+            animation: reverse progress-bar-stripes 0.40s linear infinite, animate-positive 2s;
+        }
+      </style>
+</head>
+<body>
+
+    {% comment %} aa nevigetion bar mate che {% endcomment %}
+<nav class="navbar navbar-expand-lg bg-warning border-bottom fixed-top rounded-bottom">
+    <div class="container-fluid">
+        <a href="#"><img src="https://th.bing.com/th/id/R.e0b5a2e36be1a6ed7fb050930204b819?rik=tVGnC%2bLoj3qF7Q&riu=http%3a%2f%2fwww.clipartbest.com%2fcliparts%2f4T9%2fpzp%2f4T9pzpBjc.png&ehk=0TFIB2i5KvWXRVmm9FGEt3wOJa87qe8Er8R6pgiOoV4%3d&risl=&pid=ImgRaw&r=0" style="width:55px; height:45px;" /></a>
+        <h4 class="card-meta font-weight-bold">Food Advisor</h4>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item border-right border-dark">
+            <a class="nav-link active text-light" aria-current="page" href="/home">Home</a>
+            </li>
+            <li class="nav-item border-right border-dark">
+            <a class="nav-link text-light" href="../favorite_list">Favorites</a>
+            </li>
+            
+            <li class="nav-item border-right border-dark">
+            <a class="nav-link text-light" href="/report_lists">View Report</a>
+            </li>
+            <li class="nav-item border-right border-dark">
+            <a class="nav-link text-light" href="/report_list">Generate Report</a>
+            </li>
+            <li class="nav-item ">
+            <a class="nav-link text-light" href="/set_target">Set target</a>
+            </li>
+        </ul>
+        <form class="d-flex ml-auto" role="search" action="{% url 'home' %}" method="post">
+            {% csrf_token %}
+            <input class="form-control me-2 " style="border:none;" type="search" placeholder="Search" name="query" >
+            <button class="btn btn-outline-dark rounded-circle" type="submit"><i class="bi bi-search"></i></button>
+        </form>
+        <div class="nav-item dropdown ">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="https://i.pinimg.com/originals/c7/ab/cd/c7abcd3ce378191a3dddfa4cdb2be46f.png" style="width:25px; height:25px;" />
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="../">Login</a></li>
+                <li><a class="dropdown-item " href="../logout">Logout</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li class="dropdown-item pl-1 pr-0"><a href="/about_us">About us</a>&nbsp•&nbsp<a href="/feedback">Feedback</a></li>
+            </ul>
+        </div>
+        <h5 class="nav-item font-weight-light text-capitalize">Hi, <i>{{request.session.username}}</i></h5>
+        </div>
+    </div>
+</nav> 
+    {% comment %} navigetion puru {% endcomment %}
+
+
+
+    {% comment %} {% if total_calories != 0 %} {% endcomment %}
+    {% if info %}
+    <div class="container-fluid mt-5 pt-5" >
+        <div class="row">
+            {% if info.total_calories != 0 %}
+            <div class="card col-sm-8 m-2 p-2" style="min-height:auto; background: rgba(255, 255, 255, 0.8);">
+                <h5 class="text-dark text-center border-bottom border-dark pb-2 ">Calories Participation of Item</h5>
+                <div class="row">
+                {% for x in current_status%}
+                <div class="col-4">
+                <h5 class="progress-title text-secondary" >{{ x.item_name }} (<small class="font-weight-light">{{x.item_vitamin}}</small>)</h5>
+                <div class="progress bg-secondary">
+                    <div class="progress-bar progress-bar-striped active" role="progressbar" style="width: {{ x.part }}%;" aria-valuenow="{{ x.part }}" aria-valuemin="0" aria-valuemax="100">
+                    &nbsp&nbsp{{ x.part|floatformat:"2" }}%
+                    </div>
+                </div>
+                </div>
+                {% endfor %}
+                </div>
+
+                <h5 class="text-secondary text-center mt-2">Total Vitamins : {{info.total_vitamins}}</h5>
+            </div>
+            {% endif %}
+
+            {% if info.target_calories != 0 %}
+            <div class="card col-3 ml-4 m-2 p-2" style="min-height:auto; background: rgba(255,186,33, 0.8);">
+                <!-- Content for the right side (30%) -->
+                <h5 class="progress-title text-secondary" >Total Calories : {{ info.total_calories }}/{{ info.target_calories }}</h5>
+                <div class="progress bg-secondary">
+                    <div class="progress-bar progress-bar-striped active" role="progressbar" style="width: {{ info.part}}%;" aria-valuenow="{{ info.part }}" aria-valuemin="0" aria-valuemax="100">
+                    &nbsp&nbsp{{ info.total_calories}}
+                    </div>
+                </div>
+                <h5 class="text-secondary p-1">Targeted Vitamins :{{info.target_vitamins}}</h5>
+                <h5 class="text-secondary p-1">Left : <span class="text-danger">{{info.left_vitamins}}</span></h5>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+
+    
+
+
+    <div>
+        {% if searched_item %}
+        <section class="wrapper mx-0">
+            <div class="container-fluid">
+                <div class="row">
+        
+                    {% for x in searched_item %}
+                    {% comment %} <div class="col-sm-12 col-md-6 col-lg-4 mb-4"><div class="card text-dark card-has-bg click-col" style="background-image:url('https://source.unsplash.com/600x900/?tech,street');"> {% endcomment %}
+                    <div class="col-sm-12 col-md-6 col-lg-3 mb-4"><div class="card text-dark card-has-bg click-col" >
+                        <div class="card-img-overlay d-flex flex-column">
+                            <img class="img-fluid" src="/item_images/{{x.image}}" style="height:40%; border-radius:8%;" />
+                            {% comment %} like mate nu form {% endcomment %}
+                                <form action="{% url 'add_to_favorites' %}" method="post" style="position: absolute; right: 4%;">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="food_item_id" value="{{ x.item_name }}">
+                                    <button class="btn text-light" type="submit"><i class="bi bi-heart-fill fa-lg"></i>    </button>
+                                </form>
+                            <div class="card-body">
+                                {% comment %} aa eat mate {% endcomment %}
+                                <form action="{% url 'mark_as_eaten' %}" method="post" style="position: absolute; right:0">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="food_item_id" value="{{ x.item_name }}">
+                                    <input type="number" style="border:none; outline:none; background-color: #ffffffb1;" name="quantity" value="1" min="1"><br>
+                                    <button class="btn p-0" type="submit"><img src="https://i.pinimg.com/originals/dd/9d/c9/dd9dc9d83423bc037b511d73b29e6b80.png" style="width:35px; height:35px;" title="add eaten" /></button>
+                                </form>
+                                <small class="card-meta ">{{x.get_category_display}}</small>
+                            <h4 class="card-title text-capitalize mb-0 "><a class="text-dark">{{x.item_name}}</a></h4>
+                            <small class="card-meta text-lowercase font-weight-bold"><img src="https://cdn-icons-png.flaticon.com/128/3160/3160163.png" style="width:25px; height:25px;" />{{x.calories}}/100g</small>
+                            <p class="text-capitalize mb-0 font-weight-light">vitamins : <i>{{x.vitamin}}</i></p>
+                            <p class="text-capitalize mb-0 font-weight-light">ingredients : <i>{{x.ingredient}}</i></p>
+        
+                            </div>
+        
+                            <div class="card-footer" style="overflow-y: scroll; scrollbar-width: none;">
+                                <div class="d-flex justify-content-between">
+                                    <a  data-toggle="collapse" data-target="#collapse{{x.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">Advices<i class="bi bi-chat-quote"></i></a>
+                                </div>
+                                <div class="collapse" id="collapse{{x.id}}">
+                                    {% for y in x.advice_set.all %}
+                                            <p class="card card-body p-1" style="min-height:auto;">{{y.description}}<i class="card-meta font-weight-light">- {{y.advisor.name}}<small>({{y.advisor.specification}})</small></i></p>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div></div>
+                    {% endfor %}
+        
+                </div>  
+            </div>
+            <hr class="border-light">
+        </section>
+        {% endif %}
+
+
+        {% if messages %}
+        <hr class="border-light mt-5">
+        <div class="messages text-light text-center font-weight-bold">
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+        <hr class="border-light">
+        {% endif %}
+
+        <section class="wrapper mx-0">
+            <div class="container-fluid">
+                <div class="row">
+        
+                    {% for x in item_data %}
+                    {% comment %} <div class="col-sm-12 col-md-6 col-lg-4 mb-4"><div class="card text-dark card-has-bg click-col" style="background-image:url('https://source.unsplash.com/600x900/?tech,street');"> {% endcomment %}
+                    <div class="col-sm-12 col-md-6 col-lg-3 mb-4"><div class="card text-dark card-has-bg click-col" >
+                        <div class="card-img-overlay d-flex flex-column">
+                            <img class="img-fluid" src="/item_images/{{x.image}}" style="height:40%; border-radius:8%;" />
+                            {% comment %} like mate nu form {% endcomment %}
+                                <form action="{% url 'add_to_favorites' %}" method="post" style="position: absolute; right: 4%;">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="food_item_id" value="{{ x.item_name }}">
+                                    <button class="btn text-light" type="submit"><i class="bi bi-heart-fill fa-lg"></i>    </button>
+                                </form>
+                            <div class="card-body">
+                                {% comment %} aa eat mate {% endcomment %}
+                                <form action="{% url 'mark_as_eaten' %}" method="post" style="position: absolute; right:0">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="food_item_id" value="{{ x.item_name }}">
+                                    <input type="number" style="border:none; outline:none; background-color: #ffffffb1;" name="quantity" value="1" min="1"><br>
+                                    <button class="btn p-0" type="submit"><img src="https://i.pinimg.com/originals/dd/9d/c9/dd9dc9d83423bc037b511d73b29e6b80.png" style="width:35px; height:35px;" title="add eaten" /></button>
+                                </form>
+                                <small class="card-meta ">{{x.get_category_display}}</small>
+                            <h4 class="card-title text-capitalize mb-0 "><a class="text-dark">{{x.item_name}}</a></h4>
+                            <small class="card-meta text-lowercase font-weight-bold"><img src="https://cdn-icons-png.flaticon.com/128/3160/3160163.png" style="width:25px; height:25px;" />{{x.calories}}/100g</small>
+                            <p class="text-capitalize mb-0 font-weight-light">vitamins : <i>{{x.vitamin}}</i></p>
+                            <p class="text-capitalize mb-0 font-weight-light">ingredients : <i>{{x.ingredient}}</i></p>
+        
+                            </div>
+        
+                            <div class="card-footer" style="overflow-y: scroll; scrollbar-width: none;">
+                                <div class="d-flex justify-content-between">
+                                    <a  data-toggle="collapse" data-target="#collapse{{x.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">Advices<i class="bi bi-chat-quote"></i></a>
+                                </div>
+                                <div class="collapse" id="collapse{{x.id}}">
+                                    {% for y in x.advice_set.all %}
+                                            <p class="card card-body p-1" style="min-height:auto;">{{y.description}}<a class="card-meta font-weight-light" href="mailto:{{y.advisor.email}}?body=Hello%20{{y.advisor.name}},%0AI%20am%20{{request.session.username}}%20...%0A%0AThank%20you.">- {{y.advisor.name}}<small>({{y.advisor.specification}})</small></a></p>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div></div>
+                    {% endfor %}
+        
+                </div>  
+            </div>
+        </section>
+
+        
+    </div>
+
+    <footer>
+        &copy; 2024 Food Advisor
+    </footer>
+
+
+
+    <script>
+        function addToFavorites(foodItemId) {
+            // Make an AJAX request to add the item to favorites
+            fetch('{% url "add_to_favorites" %}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify({
+                    food_item_id: foodItemId
+                })
+            })
+            .then(response => {
+                // Handle response, update star button accordingly
+                if (response.ok) {
+                    const favoriteBtn = document.getElementById(`add-to-favorites-${foodItemId}`).querySelector('.favorite-btn');
+                    const star = favoriteBtn.querySelector('.star');
+                    const isInFavorites = star.textContent === '★';
+                    if (isInFavorites) {
+                        star.textContent = '☆'; // Change to empty star
+                    } else {
+                        star.textContent = '★'; // Change to filled star
+                    }
+                } else {
+                    console.error('Failed to add to favorites');
+                }
+            })
+            .catch(error => {
+                console.error('Error adding to favorites:', error);
+            });
+        }
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-..." crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

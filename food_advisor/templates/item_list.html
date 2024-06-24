@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Item List</title>
+</head>
+<body>
+    <h2>Item List</h2>
+    <ul>
+        {% for item in items %}
+        <li>{{ item.item_name }}</li>
+        <li>{{ item.category }}</li>
+        <li>{{ item.calories }}</li>
+        <li>{{ item.vitamin }}</li>
+        <li>{{ item.ingredient }}</li>
+        {% endfor %}
+    </ul> 
+    {% comment %} <form action="" method="post">
+        <ul>
+            {% for item in items %}
+            <li>{{ item.item_name }}</li>
+            <input type="hidden" name="item_name" value="{{ item.item_name }}">
+            <li>{{ item.category }}</li>
+            <li>{{ item.calories }}</li>
+            <li>{{ item.vitamin }}</li>
+            <li>{{ item.ingredient }}</li>
+            <button type="submit">
+            {% endfor %}
+        </ul>
+    </form> {% endcomment %}
+</body>
+</html>

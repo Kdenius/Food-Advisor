@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Item</title>
+</head>
+<body>
+    <h2>Create Item</h2>
+    <!-- item_form.html -->
+<form method="post">
+    {% csrf_token %}
+    <label for="id_item_name">Item Name:</label>
+    <input type="text" id="id_item_name" name="item_name" required>
+    
+    <label for="id_category">Category:</label>
+    <input type="text" id="id_category" name="category" required>
+    
+    <label for="id_calories">Calories:</label>
+    <input type="number" id="id_calories" name="calories" required>
+    
+    <label for="id_vitamin">Vitamin:</label>
+    <input type="text" id="id_vitamin" name="vitamin" required>
+    
+    <label for="id_ingredient">Ingredient:</label>
+    <input type="text" id="id_ingredient" name="ingredient" required>
+    
+    <button type="submit">Submit</button>
+  </form>
+  
+</body>
+</html>

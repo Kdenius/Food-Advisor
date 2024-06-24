@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorite List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .item {
+            list-style: none;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 20px;
+            overflow: hidden;
+        }
+        .item img {
+            float: left;
+            margin-right: 20px;
+            max-height: 150px;
+            width: auto;
+        }
+        .item-details {
+            float: left;
+            width: calc(100% - 170px);
+        }
+        .item-details h3 {
+            margin-top: 0;
+        }
+        .remove-btn {
+            float: right;
+            background-color: #ff6347;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .remove-btn:hover {
+            background-color: #cc4c38;
+        }
+        .return-home-btn {
+            margin-bottom: 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .return-home-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="{% url 'home' %}" class="return-home-btn">Back to Home</a>
+        <h2>Favorite List</h2>
+        <ul>
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+            {% for x in items %}
+            <li class="item">
+                <img src="/item_images/{{ x.item_id.image }}">
+                <div class="item-details">
+                    <h3>{{ x.item_id.item_name }}</h3>
+                    <p><strong>Category:</strong> {{ x.item_id.get_category_display }}</p>
+                    <p><strong>Calories:</strong> {{ x.item_id.calories }}</p>
+                    <p><strong>Vitamin:</strong> {{ x.item_id.vitamin }}</p>
+                    <p><strong>Ingredient:</strong> {{ x.item_id.ingredient }}</p>
+                    <form action="{% url 'remove_from_favorites' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="food_item_id" value="{{ x.item_id.item_name }}">
+                        <button type="submit" class="remove-btn">Remove from Favorites</button>
+                    </form>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Report</title>
+</head>
+<body>
+    <h2>Create Report</h2>
+    <!-- report_form.html -->
+<form method="post">
+    {% csrf_token %}
+    <label for="id_date">Date:</label>
+    <input type="date" id="id_date" name="date" required>
+    
+    <label for="id_total_calories">Total Calories:</label>
+    <input type="number" id="id_total_calories" name="total_calories" required>
+    
+    <label for="id_quentity">Quantity:</label>
+    <input type="number" id="id_quentity" name="quentity" required>
+    
+    <button type="submit">Submit</button>
+  </form>
+  
+</body>
+</html>

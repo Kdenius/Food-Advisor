@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <style>
+        :root {
+            --body-bg-color: grey;
+            --container-bg-color: lightblue;
+            --profile-border-color: black;
+            --text-color: blue;
+            --link-hover-color: blue; 
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--body-bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 10px;
+            padding: 20px;
+            text-align: center;
+            background-color: var(--container-bg-color);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .profile {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 2px solid var(--profile-border-color);
+            border-radius: 8px;
+        }
+        
+        .profile img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+        
+        .profile .details {
+            text-align: left;
+        }
+        
+        .profile h2 {
+            margin-top: 0;
+            font-size: 24px;
+            color: var(--text-color);
+        }
+        
+        .profile p {
+            margin-bottom: 0;
+            font-size: 16px;
+            color:black;
+        }
+        
+        .contact-us {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        
+        .contact-us h3 {
+            margin: 0 10px 0 0;
+            font-size: 18px;
+            color: var(--text-color);
+        }
+        
+        .contact-us a {
+            margin: 0 10px;
+            color: var(--text-color); /* Set link color */
+        }
+        
+        .contact-us a:hover {
+            color: var(--link-hover-color); /* Change link color on hover */
+        }
+        
+        .contact-us img {
+            width: 40px;
+            height: 40px;
+        }
+        .return-home-btn {
+            margin-bottom: 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .return-home-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>About Us</h1>
+        <div class="profile">
+            <img src="../item_images/jay.jpg" alt="Person 1">
+            <div class="details">
+                <h2>Jay</h2>
+                <p>My name is Jay, and I'm currently pursuing my second year in Computer Engineering. I have a solid grasp of several programming languages, including Java, C++, C, PHP, HTML, CSS, JavaScript, Django, and Python. With expertise in both frontend and backend development, I enjoy crafting seamless user experiences and building robust systems that bring ideas to life. I am codechef 3 star rating.</p>
+                <div class="contact-us">
+                    <h3>Contact Me:</h3>
+                    <a href="https://www.linkedin.com/in/jay-chavda-2352ba258/"><img src="../item_images/linkdin.png" alt="LinkedIn"></a>
+                    <a href="https://github.com/jkchavda8"><img src="../item_images/github.png" alt="GitHub"></a>
+                    <a href="mailto:jay886888@gmail.com?subject=Your%20Subject&body=Hello%20Jay,%0A%0A"><img src="../item_images/gmail.png" alt="Gmail"></a>
+                </div>
+            </div>
+        </div>
+        <div class="profile">
+            {% comment %} <img src="person2" alt="Person 2"> {% endcomment %}
+            <div class="details">
+                <h2>Kishan</h2>
+                <p>My name is Kishan, and I'm currently pursuing my second year in Computer Engineering. I have a solid grasp of several programming languages, including Java, C++, C, PHP, HTML, CSS, JavaScript, Django, and Python. With expertise in both frontend and backend development, I enjoy crafting seamless user experiences and building robust systems that bring ideas to life.</p>
+            </div>
+        </div>
+        <a href="{% url 'home' %}" class="return-home-btn">Back to Home</a>
+    </div>
+</body>
+</html>
